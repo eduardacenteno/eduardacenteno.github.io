@@ -1,0 +1,20 @@
+title: Eduarda Centeno
+description: Neuroscientist, Open Science advocate and co-Executive Director of the Brazilian Reproducibility Network.
+url: "https://eduardacenteno.com"
+baseurl: ""
+lang: en
+permalink: /:year/:month/:day/:title/
+
+contact: egzcenteno(at)gmail.com
+social:
+  linkedin: https://linkedin.com/in/eduardagzc/
+  github: https://github.com/eduardacenteno
+  orcid: https://orcid.org/0000-0002-1490-4903
+
+exclude:
+  - build_site.py
+  - migrate_posts.py
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% seo %}
+  {% feed_meta %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="{{ '/' | relative_url }}">
+        <img src="{{ '/assets/img/avatar.png' | relative_url }}" alt="" width="44" height="44">
+        <span>{{ site.title }}</span>
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav">☰ Menu</button>
+      <nav id="nav" class="nav">
+        <ul>
+          <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>About Me</a></li>
+          <li><a href="{{ '/curriculum-vitae/' | relative_url }}" {% if page.url == '/curriculum-vitae/' %}aria-current="page"{% endif %}>Professional Experience</a></li>
+          <li><a href="{{ '/highlights/' | relative_url }}" {% if page.url == '/highlights/' or page.layout == 'post' %}aria-current="page"{% endif %}>Highlights</a></li>
+        </ul>
+        <ul class="social">
+          <li><a href="{{ site.social.linkedin }}">LinkedIn</a></li>
+          <li><a href="{{ site.social.github }}">GitHub</a></li>
+          <li><a href="{{ site.social.orcid }}">ORCID</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="wrap">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">Contact: {{ site.contact }}</div>
+  </footer>
+
+  <script>
+    const btn = document.querySelector('.menu-toggle');
+    const nav = document.getElementById('nav');
+    btn.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    });
+  </script>
+</body>
+</html>
