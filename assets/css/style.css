@@ -130,3 +130,4 @@ blockquote { margin: 1.5rem 0; padding: .25rem 1.25rem; border-left: 3px solid v
   .post-nav { grid-template-columns: 1fr; }
   .post-nav .next { grid-column: 1; }
 }
+
