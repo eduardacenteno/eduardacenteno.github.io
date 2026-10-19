@@ -4,14 +4,58 @@ title: Highlights
 permalink: /highlights/
 ---
 <h1>Highlights</h1>
+<p class="intro">News, events and milestones from my journey in neuroscience and Open Science.</p>
 
+<div class="filters" role="group" aria-label="Filter by topic">
+  <button class="chip is-active" data-filter="all">All</button>
+  {% assign tags = site.tags | sort %}
+  {% for tag in tags %}
+  <button class="chip" data-filter="{{ tag[0] | slugify }}">{{ tag[0] | capitalize }}</button>
+  {% endfor %}
+</div>
+
+<div class="cards">
 {% for post in site.posts %}
-<article class="post-card">
-  <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-  <p class="meta">
-    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
-    {% if post.tags.size > 0 %} · {{ post.tags | join: ", " }}{% endif %}
-  </p>
-  {{ post.content }}
-</article>
+  {% assign thumb = "" %}
+  {% assign parts = post.content | split: 'src="' %}
+  {% if parts.size > 1 %}{% assign thumb = parts[1] | split: '"' | first %}{% endif %}
+  {% capture tagslugs %}{% for t in post.tags %}{{ t | slugify }} {% endfor %}{% endcapture %}
+  <a class="card" href="{{ post.url | relative_url }}" data-tags="{{ tagslugs | strip }}">
+    {% if thumb != "" %}
+      <img class="card-img" src="{{ thumb }}" alt="" loading="lazy">
+    {% else %}
+      <div class="card-img placeholder" aria-hidden="true"></div>
+    {% endif %}
+    <div class="card-body">
+      <p class="meta">{{ post.date | date: "%b %-d, %Y" }}</p>
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.content | strip_html | truncatewords: 22 }}</p>
+    </div>
+  </a>
 {% endfor %}
+</div>
+
+<p class="empty" hidden>No posts in this category yet.</p>
+
+<script>
+  const chips = [...document.querySelectorAll('.chip')];
+  const cards = [...document.querySelectorAll('.card')];
+  const empty = document.querySelector('.empty');
+
+  function applyFilter(f) {
+    chips.forEach(c => c.classList.toggle('is-active', c.dataset.filter === f));
+    let visible = 0;
+    cards.forEach(card => {
+      const show = f === 'all' || card.dataset.tags.split(' ').includes(f);
+      card.hidden = !show;
+      if (show) visible++;
+    });
+    empty.hidden = visible > 0;
+    const url = new URL(location);
+    f === 'all' ? url.searchParams.delete('tag') : url.searchParams.set('tag', f);
+    history.replaceState(null, '', url);
+  }
+
+  chips.forEach(chip => chip.addEventListener('click', () => applyFilter(chip.dataset.filter)));
+  applyFilter(new URLSearchParams(location.search).get('tag') || 'all');
+</script>

@@ -1,12 +1,28 @@
 ---
 layout: default
 ---
+<nav class="breadcrumb"><a href="{{ '/highlights/' | relative_url }}">← All highlights</a></nav>
+
 <article class="post">
   <h1>{{ page.title }}</h1>
   <p class="meta">
     <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
-    {% if page.tags.size > 0 %} · {{ page.tags | join: ", " }}{% endif %}
   </p>
+  {% if page.tags.size > 0 %}
+  <p class="post-tags">
+    {% for t in page.tags %}
+    <a class="chip" href="{{ '/highlights/' | relative_url }}?tag={{ t | slugify }}">{{ t | capitalize }}</a>
+    {% endfor %}
+  </p>
+  {% endif %}
   {{ content }}
 </article>
-<p class="back"><a href="{{ '/highlights/' | relative_url }}">← All highlights</a></p>
+
+<nav class="post-nav" aria-label="More highlights">
+  {% if page.next %}
+  <a class="prev" href="{{ page.next.url | relative_url }}"><span>← Newer</span>{{ page.next.title }}</a>
+  {% else %}<span></span>{% endif %}
+  {% if page.previous %}
+  <a class="next" href="{{ page.previous.url | relative_url }}"><span>Older →</span>{{ page.previous.title }}</a>
+  {% endif %}
+</nav>
