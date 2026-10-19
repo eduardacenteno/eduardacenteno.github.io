@@ -47,7 +47,6 @@ blockquote { margin: 1.5rem 0; padding: .25rem 1.25rem; border-left: 3px solid v
   color: var(--text); text-decoration: none;
   font: 400 1.8125rem/1.2 var(--font);
 }
-.brand img { margin: 0; border-radius: 50%; width: 80px; height: 80px; object-fit: cover; }
 
 .nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
 .nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.1rem; }
@@ -68,7 +67,8 @@ blockquote { margin: 1.5rem 0; padding: .25rem 1.25rem; border-left: 3px solid v
   .social { padding-left: 0 !important; border-left: none; flex-direction: row !important; }
   h1 { font-size: 2.2rem; }
   .brand { font-size: 1.4rem; }
-  .brand img { width: 60px; height: 60px; }
+  .banner { display: block; padding-top: 1.5rem; }
+  .banner img { width: 100%; height: auto; margin: 0; border-radius: 0; }
 }
 
 /* Posts */

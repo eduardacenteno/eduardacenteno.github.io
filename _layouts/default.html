@@ -14,11 +14,12 @@
   <a class="skip" href="#content">Skip to content</a>
 
   <header class="site-header">
-    <div class="wrap header-inner">
-      <a class="brand" href="{{ '/' | relative_url }}">
-        <img src="{{ '/assets/img/avatar.png' | relative_url }}" alt="" width="80" height="80">
-        <span>{{ site.title }}</span>
-      </a>
+  <div class="wrap">
+    <a class="banner" href="{{ '/' | relative_url }}">
+      <img src="{{ '/assets/img/avatar.png' | relative_url }}" alt="Eduarda Centeno">
+    </a>
+    <div class="header-inner">
+      <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
       <button class="menu-toggle" aria-expanded="false" aria-controls="nav">☰ Menu</button>
       <nav id="nav" class="nav">
         <ul>
@@ -33,7 +34,8 @@
         </ul>
       </nav>
     </div>
-  </header>
+  </div>
+</header>
 
   <main id="content" class="wrap">
     {{ content }}
